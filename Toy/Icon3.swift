@@ -10,11 +10,13 @@ import SwiftUI
 
 // ---------------------------------------------------------------------------------------
 // This is the code that puts all of the structure and function into a single enum.  This
-// is the "natural" way to do things when using SwiftUI, but it is wrong.  It doesn't show
-// in this simple example, but each of the cases can and should have a lot of additional
-// processing methods, and each of them will be implemented as a func with a switch
-// statement with a case for each option in the enum.  This is difficult to use and
-// maintain.
+// is the "natural" way to do things when using SwiftUI and TCA, but it is wrong.  It
+// doesn't show in this simple example, but each of the cases can and should have a lot
+// of additional processing methods, and each of them will be implemented as a func with
+// a switch statement with a case for each option in the enum.  This is difficult to use
+// and maintain.
+// There may be better ways to implement the TCA code, but this still demostrates how the
+// code to maintain a single Icon is distributed through multiple enum statements.
 // ---------------------------------------------------------------------------------------
 
 struct Icon3 {

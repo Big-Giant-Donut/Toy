@@ -12,9 +12,8 @@ import SwiftUI
 struct ToyApp: App {
     var tcaStore = Store(
         initialState: TcaReducer.State(
-            protocolTca: false,
-            icon3: Icon3Reducer.State(child: one3.icon3State),
-            icon4: Icon4Reducer.State(child: AnyIcon4State(state: one4.makeInitialState()))
+            icon4: Icon4Reducer.State(child: AnyIcon4State(state: one4.makeInitialState())),
+            icon5: Icon5Reducer.State(child: AnyIcon5State(state: one5.makeInitialState()))
         ),
         reducer: { TcaReducer()
         }

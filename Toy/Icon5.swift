@@ -1,8 +1,8 @@
 //
-//  Icon4.swift
+//  Icon5.swift
 //  Toy
 //
-//  Created by Larry Atkin on 11/4/25.
+//  Created by Larry Atkin on 11/8/25.
 //
 
 import ComposableArchitecture
@@ -16,42 +16,43 @@ import SwiftUI
 //
 // Also note that there are *no* enums in this file.
 //
-// This file attempts to use TCA to handle state transitions, but it fails.  When the
-// chosen icon changes, the state changes, but Observation tries to refresh the View,
-// which cannot deal with the changed state.
+// This file attempts to use TCA to handle state transitions, and it succeeds.  It is
+// using a modified TCA that allows scoping to a child state with a closure that can
+// return a nil for the state when the type of the child state changes.  This allows
+// TCA to supply a previously cached state and avoids a crash.
 // ---------------------------------------------------------------------------------------
 
-struct Icon4Type {
-    let makeInitialState: (Icon4) -> any Icon4State
-    let view: (StoreOf<Icon4Reducer>, @escaping (Icon4Reducer.State) -> Icon4State, @escaping (Icon4Action) -> Icon4Reducer.Action) -> AnyView
+struct Icon5Type {
+    let makeInitialState: (Icon5) -> any Icon5State
+    let view: (StoreOf<Icon5Reducer>, @escaping (Icon5Reducer.State) -> Icon5State, @escaping (Icon5Action) -> Icon5Reducer.Action) -> AnyView
 }
 
-class Icon4 {
+class Icon5 {
 
     // A class function to access the implementations of aspects required to procaess an
     // icon.  (This is a class func because Swift does not yet support a class var.)
-    class func iconType() -> Icon4Type {
+    class func iconType() -> Icon5Type {
         return Self._iconType
     }
 
 }
 
-extension Icon4 {
+extension Icon5 {
 
     // A collection of closures to implement each of the aspects required to process an icon.
     // This must be defined for each icon.  Here (in the abstract super-class) all
     // closures simply abort.
-    private static var _iconType = Icon4Type(
+    private static var _iconType = Icon5Type(
         makeInitialState: { _ in fatalError() },
         view: { _, _, _ in fatalError() }
     )
 
     // Convenience functions to access the closures in _iconType
-    func makeInitialState() -> any Icon4State {
+    func makeInitialState() -> any Icon5State {
         Self.iconType().makeInitialState(self)
     }
 
-    func view(store: StoreOf<Icon4Reducer>) -> AnyView {
+    func view(store: StoreOf<Icon5Reducer>) -> AnyView {
         Self.iconType().view(
             store,
             { $0.child.state },
@@ -61,10 +62,10 @@ extension Icon4 {
 
 }
 
-class Icon4Pict: Icon4 {
+class Icon5Pict: Icon5 {
     var name: String
 
-    public override class func iconType() -> Icon4Type {
+    public override class func iconType() -> Icon5Type {
         return Self._iconType
     }
 
@@ -73,16 +74,16 @@ class Icon4Pict: Icon4 {
     }
 }
 
-extension Icon4Pict {
+extension Icon5Pict {
 
-    private static var _iconType = Icon4Type(
-        makeInitialState: { Pict4Reducer.State(icon: $0) },
+    private static var _iconType = Icon5Type(
+        makeInitialState: { Pict5Reducer.State(icon: $0) },
         view: { store, childState, parentAction in
             return AnyView(
-                Pict4View(
+                Pict5View(
                     store: store.scope(
-                        state: { state in childState(state) as! Pict4Reducer.State },
-                        action: parentAction as (Pict4Reducer.Action) -> Icon4Reducer.Action
+                        state: { state in childState(state) as? Pict5Reducer.State },
+                        action: parentAction as (Pict5Reducer.Action) -> Icon5Reducer.Action
                     )
                 )
             )
@@ -90,10 +91,10 @@ extension Icon4Pict {
     )
 }
 
-class Icon4Label: Icon4 {
+class Icon5Label: Icon5 {
     var label: String
 
-    public override class func iconType() -> Icon4Type {
+    public override class func iconType() -> Icon5Type {
         return Self._iconType
     }
 
@@ -103,16 +104,16 @@ class Icon4Label: Icon4 {
 
 }
 
-extension Icon4Label {
+extension Icon5Label {
 
-    private static var _iconType = Icon4Type(
-        makeInitialState: { Label4Reducer.State(icon: $0) },
+    private static var _iconType = Icon5Type(
+        makeInitialState: { Label5Reducer.State(icon: $0) },
         view: { store, childState, parentAction in
             AnyView(
-                Label4View(
+                Label5View(
                     store: store.scope(
-                        state: { state in childState(state) as! Label4Reducer.State },
-                        action: parentAction as (Label4Reducer.Action) -> Icon4Reducer.Action
+                        state: { state in childState(state) as? Label5Reducer.State },
+                        action: parentAction as (Label5Reducer.Action) -> Icon5Reducer.Action
                     )
                 )
             )
@@ -120,11 +121,11 @@ extension Icon4Label {
     )
 }
 
-class Icon4Both: Icon4 {
+class Icon5Both: Icon5 {
     var name: String
     var label: String
 
-    public override class func iconType() -> Icon4Type {
+    public override class func iconType() -> Icon5Type {
         return Self._iconType
     }
 
@@ -134,16 +135,16 @@ class Icon4Both: Icon4 {
     }
 }
 
-extension Icon4Both {
+extension Icon5Both {
 
-    private static var _iconType = Icon4Type(
-        makeInitialState: { Both4Reducer.State(icon: $0) },
+    private static var _iconType = Icon5Type(
+        makeInitialState: { Both5Reducer.State(icon: $0) },
         view: { store, childState, parentAction in
             AnyView(
-                Both4View(
+                Both5View(
                     store: store.scope(
-                        state: { state in childState(state) as! Both4Reducer.State },
-                        action: parentAction as (Both4Reducer.Action) -> Icon4Reducer.Action
+                        state: { state in childState(state) as? Both5Reducer.State },
+                        action: parentAction as (Both5Reducer.Action) -> Icon5Reducer.Action
                     )
                 )
             )
@@ -154,9 +155,9 @@ extension Icon4Both {
 
 // And some test data;
 
-var one4 = Icon4Pict(name: "sun.max")
-var two4 = Icon4Label(label: "Label")
-var three4 = Icon4Both(name: "moon.circle", label: "G'Nite")
+var one5 = Icon5Pict(name: "sun.max")
+var two5 = Icon5Label(label: "Label")
+var three5 = Icon5Both(name: "moon.circle", label: "G'Nite")
 
 // ---------------------------------------------------------------------------------------
 // This is the code that implements the UI.  It uses a protocol for the state.  Each
@@ -165,48 +166,48 @@ var three4 = Icon4Both(name: "moon.circle", label: "G'Nite")
 // icons that follow the protocol and override class func iconType().
 // ---------------------------------------------------------------------------------------
 
-protocol Icon4State {
-    var icon: Icon4 { get }
+protocol Icon5State {
+    var icon: Icon5 { get }
 }
 
-protocol Icon4Action {
+protocol Icon5Action {
 
 }
 
-struct AnyIcon4State {
-    var state: any Icon4State
+struct AnyIcon5State {
+    var state: any Icon5State
 
-    func view(store: StoreOf<Icon4Reducer>) -> AnyView {
+    func view(store: StoreOf<Icon5Reducer>) -> AnyView {
         state.icon.view(store: store)
     }
 }
 
-//struct AnyIcon4Action {
-//    var wrapped: any Icon4Action
+//struct AnyIcon5Action {
+//    var wrapped: any Icon5Action
 //}
 
 @Reducer
-struct Icon4Reducer {
+struct Icon5Reducer {
 
     @ObservableState
     struct State {
-        var child: AnyIcon4State
+        var child: AnyIcon5State
     }
 
     @CasePathable
     enum Action {
-        case iconClicked(Icon4)
-        case child(any Icon4Action)
+        case iconClicked(Icon5)
+        case child(any Icon5Action)
     }
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .iconClicked(let icon4):
-                state.child = AnyIcon4State(state: icon4.makeInitialState())
+            case .iconClicked(let icon5):
+                state.child = AnyIcon5State(state: icon5.makeInitialState())
                 return .none
             case .child:
-                // TODO: Invoke the child reducer with Icon4State and Icon4Action
+                // TODO: Invoke the child reducer with Icon5State and Icon5Action
                 return .none
             }
         }
@@ -214,12 +215,12 @@ struct Icon4Reducer {
 }
 
 @Reducer
-struct Pict4Reducer {
+struct Pict5Reducer {
     @ObservableState
-    struct State: Icon4State {
-        var icon: Icon4
-        var pictIcon: Icon4Pict {
-            icon as! Icon4Pict
+    struct State: Icon5State {
+        var icon: Icon5
+        var pictIcon: Icon5Pict {
+            icon as! Icon5Pict
         }
         var name: String {
             get {
@@ -232,7 +233,7 @@ struct Pict4Reducer {
     }
 
     @CasePathable
-    enum Action: Icon4Action {
+    enum Action: Icon5Action {
 
     }
 
@@ -242,13 +243,13 @@ struct Pict4Reducer {
 }
 
 @Reducer
-struct Label4Reducer {
+struct Label5Reducer {
     @ObservableState
-    struct State: Icon4State {
-        var icon: Icon4
-        var labelIcon: Icon4Label {
+    struct State: Icon5State {
+        var icon: Icon5
+        var labelIcon: Icon5Label {
             get {
-                icon as! Icon4Label
+                icon as! Icon5Label
             }
         }
         var label: String {
@@ -263,7 +264,7 @@ struct Label4Reducer {
     }
 
     @CasePathable
-    enum Action: Icon4Action {
+    enum Action: Icon5Action {
 
     }
 
@@ -273,13 +274,13 @@ struct Label4Reducer {
 }
 
 @Reducer
-struct Both4Reducer {
+struct Both5Reducer {
     @ObservableState
-    struct State: Icon4State {
-        var icon: Icon4
-        var bothIcon: Icon4Both {
+    struct State: Icon5State {
+        var icon: Icon5
+        var bothIcon: Icon5Both {
             get {
-                icon as! Icon4Both
+                icon as! Icon5Both
             }
         }
         var name: String {
@@ -301,7 +302,7 @@ struct Both4Reducer {
     }
 
     @CasePathable
-    enum Action: Icon4Action {
+    enum Action: Icon5Action {
 
     }
 
@@ -311,8 +312,8 @@ struct Both4Reducer {
 }
 
 
-struct Icon4View: View {
-    var store: StoreOf<Icon4Reducer>
+struct Icon5View: View {
+    var store: StoreOf<Icon5Reducer>
 
     @ViewBuilder
     var body: some View {
@@ -320,8 +321,8 @@ struct Icon4View: View {
     }
 }
 
-struct Pict4View: View {
-    let store: StoreOf<Pict4Reducer>
+struct Pict5View: View {
+    let store: StoreOf<Pict5Reducer>
 
     @ViewBuilder
     var body: some View {
@@ -331,8 +332,8 @@ struct Pict4View: View {
     }
 }
 
-struct Label4View: View {
-    let store: StoreOf<Label4Reducer>
+struct Label5View: View {
+    let store: StoreOf<Label5Reducer>
 
     @ViewBuilder
     var body: some View {
@@ -340,8 +341,8 @@ struct Label4View: View {
     }
 }
 
-struct Both4View: View {
-    let store: StoreOf<Both4Reducer>
+struct Both5View: View {
+    let store: StoreOf<Both5Reducer>
 
     @ViewBuilder
     var body: some View {
@@ -354,4 +355,5 @@ struct Both4View: View {
         .padding()
     }
 }
+
 

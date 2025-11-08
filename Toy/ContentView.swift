@@ -13,12 +13,12 @@ struct ContentView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
+//            VStack {
+//                Text("VanillaView")
+//                VanillaView()
+//            }
             VStack {
-                Text("VanillaView")
-                VanillaView()
-            }
-            VStack {
-                Text("TCA View")
+//                Text("TCA View")
                 TcaView(store: store)
             }
         }

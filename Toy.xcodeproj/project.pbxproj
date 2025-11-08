@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,9 @@
 		D8B0CA412EB6F2400005A6AA /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D8B0CA402EB6F2400005A6AA /* ComposableArchitecture */; };
 		D8D88EFB2EB82688007EC82E /* Icon3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D88EFA2EB82680007EC82E /* Icon3.swift */; };
 		D8D8900F2EB878F6007EC82E /* Content3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D8900E2EB878F6007EC82E /* Content3View.swift */; };
+		D8DF74FE2EBF2C1800D3F5E3 /* Icon5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF74FD2EBF2C0E00D3F5E3 /* Icon5.swift */; };
+		D8DF75002EBF2DC900D3F5E3 /* Content5View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DF74FF2EBF2DBD00D3F5E3 /* Content5View.swift */; };
+		D8DF75032EBF331E00D3F5E3 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D8DF75022EBF331E00D3F5E3 /* ComposableArchitecture */; };
 		D8E33AF12BBE7B9A00B76DAA /* Icon2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8313B0F2BBD3C60007B761D /* Icon2.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,8 @@
 		D8B0CA3D2EB6F1BE0005A6AA /* TcaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcaView.swift; sourceTree = "<group>"; };
 		D8D88EFA2EB82680007EC82E /* Icon3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon3.swift; sourceTree = "<group>"; };
 		D8D8900E2EB878F6007EC82E /* Content3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content3View.swift; sourceTree = "<group>"; };
+		D8DF74FD2EBF2C0E00D3F5E3 /* Icon5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon5.swift; sourceTree = "<group>"; };
+		D8DF74FF2EBF2DBD00D3F5E3 /* Content5View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content5View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 			files = (
 				D8A2E8792EBC885D004372D5 /* ComposableArchitecture in Frameworks */,
 				D8B0CA412EB6F2400005A6AA /* ComposableArchitecture in Frameworks */,
+				D8DF75032EBF331E00D3F5E3 /* ComposableArchitecture in Frameworks */,
 				D898C9032EBD9F4100A3AFE5 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,11 +132,13 @@
 				D8313B0F2BBD3C60007B761D /* Icon2.swift */,
 				D8D88EFA2EB82680007EC82E /* Icon3.swift */,
 				D8A2E7612EBAC99E004372D5 /* Icon4.swift */,
+				D8DF74FD2EBF2C0E00D3F5E3 /* Icon5.swift */,
 				D8313B0D2BBD2E08007B761D /* ContentView.swift */,
 				D8313AE22BBCFF02007B761D /* Content1View.swift */,
 				D8313B112BBD3C66007B761D /* Content2View.swift */,
 				D8D8900E2EB878F6007EC82E /* Content3View.swift */,
 				D8A2E7632EBACAFD004372D5 /* Content4View.swift */,
+				D8DF74FF2EBF2DBD00D3F5E3 /* Content5View.swift */,
 				D8B0CA3B2EB6EC090005A6AA /* VanillaView.swift */,
 				D8B0CA3D2EB6F1BE0005A6AA /* TcaView.swift */,
 				D8313AE42BBCFF04007B761D /* Assets.xcassets */,
@@ -254,7 +262,7 @@
 			);
 			mainGroup = D8313AD42BBCFF02007B761D;
 			packageReferences = (
-				D898C9012EBD9F4100A3AFE5 /* XCLocalSwiftPackageReference "../swift-composable-architecture" */,
+				D8DF75012EBF331E00D3F5E3 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = D8313ADE2BBCFF02007B761D /* Products */;
 			projectDirPath = "";
@@ -300,8 +308,10 @@
 			files = (
 				D8313AE32BBCFF02007B761D /* Content1View.swift in Sources */,
 				D8313AE12BBCFF02007B761D /* ToyApp.swift in Sources */,
+				D8DF75002EBF2DC900D3F5E3 /* Content5View.swift in Sources */,
 				D8313B122BBD3C66007B761D /* Content2View.swift in Sources */,
 				D8B0CA3E2EB6F1BE0005A6AA /* TcaView.swift in Sources */,
+				D8DF74FE2EBF2C1800D3F5E3 /* Icon5.swift in Sources */,
 				D8D88EFB2EB82688007EC82E /* Icon3.swift in Sources */,
 				D8D8900F2EB878F6007EC82E /* Content3View.swift in Sources */,
 				D8313B0E2BBD2E08007B761D /* ContentView.swift in Sources */,
@@ -631,13 +641,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		D898C9012EBD9F4100A3AFE5 /* XCLocalSwiftPackageReference "../swift-composable-architecture" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../swift-composable-architecture";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		D8B0CA3F2EB6F2400005A6AA /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -645,6 +648,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.23.1;
+			};
+		};
+		D8DF75012EBF331E00D3F5E3 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Big-Giant-Donut/swift-composable-architecture.git";
+			requirement = {
+				branch = "add-optional-closure-scoped-core";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -661,6 +672,11 @@
 		D8B0CA402EB6F2400005A6AA /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8B0CA3F2EB6F2400005A6AA /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		D8DF75022EBF331E00D3F5E3 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8DF75012EBF331E00D3F5E3 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */

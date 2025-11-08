@@ -13,34 +13,29 @@ struct TcaReducer {
 
     @ObservableState
     struct State {
-        var protocolTca: Bool
-        var icon3: Icon3Reducer.State
         var icon4: Icon4Reducer.State
+        var icon5: Icon5Reducer.State
     }
 
     @CasePathable
     enum Action {
-        case icon3(Icon3Reducer.Action)
         case icon4(Icon4Reducer.Action)
-        case toggleProtocolClicked(Bool)
+        case icon5(Icon5Reducer.Action)
     }
 
     var body: some ReducerOf<Self> {
-        Scope(state: \.icon3, action: \.icon3) {
-            Icon3Reducer()
-        }
         Scope(state: \.icon4, action: \.icon4) {
             Icon4Reducer()
+        }
+        Scope(state: \.icon5, action: \.icon5) {
+            Icon5Reducer()
         }
         Reduce { state, action in
             switch action {
 
-            case .icon3(_):
+            case .icon4:
                 return .none
-            case .icon4(_):
-                return .none
-            case .toggleProtocolClicked(let value):
-                state.protocolTca = value
+            case .icon5:
                 return .none
             }
         }
@@ -51,20 +46,17 @@ struct TcaView: View {
     var store: StoreOf<TcaReducer>
 
     var body: some View {
-        VStack {
-            Toggle(
-                isOn: Binding(
-                    get: { store.protocolTca },
-                    set: { store.send(.toggleProtocolClicked($0)) }
-                )
-            ){ Text("Use Protocol") }
-            if store.protocolTca {
-                Text("Icon4")
+        HStack(alignment: .top, spacing: 20) {
+            VStack {
+                Text("Icon4 crashes")
                 Content4View(store: store.scope(state: \.icon4, action: \.icon4))
-            } else {
-                Text("Icon3")
-                Content3View(store: store.scope(state: \.icon3, action: \.icon3))
             }
+            .frame(width: 300, height: 200)
+            VStack {
+                Text("Icon5")
+                Content5View(store: store.scope(state: \.icon5, action: \.icon5))
+            }
+            .frame(width: 300, height: 200)
         }
     }
 }
